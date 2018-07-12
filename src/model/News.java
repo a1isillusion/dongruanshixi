@@ -1,15 +1,19 @@
 package model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class News {
-public int id;
+public String id;
 public String title;
 public String content;
 public String author;
+public Set<Comment> comments=new HashSet<Comment>();
 
-public int getId() {
+public String getId() {
 	return id;
 }
-public void setId(int id) {
+public void setId(String id) {
 	this.id = id;
 }
 public String getTitle() {
@@ -29,6 +33,17 @@ public String getAuthor() {
 }
 public void setAuthor(String author) {
 	this.author = author;
+}
+public Set<Comment> getComments() {
+	return comments;
+}
+public void setComments(Set<Comment> comments) {
+	this.comments = comments;
+}
+@Override
+public String toString() {
+	return "News [id=" + id + ", title=" + title + ", content=" + content + ", author=" + author + ", comments="
+			+ comments + "]";
 }
 
 }

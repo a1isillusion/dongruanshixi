@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-<package name="default" extends="struts-default">
+<package name="default" extends="struts-default,json-default">
+<interceptors>
+<interceptor name="ContentInterceptor" class="dongruan.ContentInterceptor"></interceptor>
+<interceptor-stack name="mystack">
+<interceptor-ref name="defaultStack"></interceptor-ref>
+<interceptor-ref name="ContentInterceptor"></interceptor-ref>
+</interceptor-stack>
+</interceptors>
 <action name="user_*" class="dongruan.UserAction" method="{1}">
 <result name="success">success.jsp</result>
 <result name="error">error.jsp</result>
@@ -9,6 +16,16 @@
 <action name="news_*" class="dongruan.NewsAction" method="{1}">
 <result name="success">success.jsp</result>
 <result name="list">newslist.jsp</result>
+</action>
+<action name="comment_*" class="dongruan.CommentAction" method="{1}">
+<interceptor-ref name="mystack"></interceptor-ref>
+<result name="success">success.jsp</result>
+<result name="list">newslist.jsp</result>
+</action>
+<action name="search_*" class="dongruan.SearchAction" method="{1}">
+<result name="success" type="json">
+   <param name="excludeProperties">param</param>    　　
+</result>
 </action>
 </package>
 </struts>    

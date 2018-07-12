@@ -16,6 +16,7 @@
   <property name="hibernate.current_session_context_class">thread</property>     
   <mapping resource="model/user.hbm.xml"/>
   <mapping resource="model/news.hbm.xml"/>
+  <mapping resource="model/comment.hbm.xml"/>
 </session-factory>
 
 </hibernate-configuration>

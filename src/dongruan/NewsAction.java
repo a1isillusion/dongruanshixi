@@ -26,7 +26,13 @@ public void setNewsList(List<News> newsList) {
 	this.newsList = newsList;
 }
 
+public String changeNews() {
+	System.out.println(news.id);
+	NewsDao.addNews(news);
+	return SUCCESS;
+}
 public String addNews() {
+	System.out.println(news.content);
 	NewsDao.addNews(news);
 	return SUCCESS;
 }

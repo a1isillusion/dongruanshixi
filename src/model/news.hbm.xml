@@ -6,11 +6,15 @@
  <hibernate-mapping>  
   <class name="model.News" table="news">  
     <id name="id">  
-     <generator class="native"></generator>  
+     <generator class="uuid.hex"></generator>  
     </id>  
     <property name="title"></property>  
     <property name="content"></property>  
     <property name="author"></property>
+    <set name="comments" lazy="false">
+    <key column="news"></key>
+    <one-to-many class="model.Comment"/>
+    </set>
   </class>  
 
  </hibernate-mapping>

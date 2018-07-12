@@ -1,3 +1,4 @@
+<%@page import="model.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
@@ -15,10 +16,15 @@
 title:<s:property value="#news.title" />
 </li>
 <li>
-content:<s:property value="#news.content" />
+content:<s:property value="#news.content" escape="false"/>
 </li>
 <li>
 author:<s:property value="#news.author" />
+</li>
+<li>
+<s:a href="addcomment.jsp?id=%{#news.id}">
+     添加评论
+</s:a>
 </li>
 </s:iterator>
 </ul>

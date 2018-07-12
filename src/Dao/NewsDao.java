@@ -20,9 +20,19 @@ public static List<News> queryNews(){
 public static void addNews(News news) {
 	Session session=HibernateFactory.getSession();
 	Transaction tx=session.beginTransaction();
-	session.save(news);
+	session.saveOrUpdate(news);
 	tx.commit();
 	session.close();
 }
-
+public static List<News> searchNews(String param){
+	System.out.println(param);;
+	Session session=HibernateFactory.getSession();
+	Transaction tx=session.beginTransaction();
+	String hql="from News as n where n.content like '%"+param+"%'";
+	System.out.println(hql);
+	List<News> newsList=session.createQuery(hql).list();
+	tx.commit();
+	session.close();
+	return newsList;
+}
 }
