@@ -11,11 +11,14 @@
 </interceptors>
 <action name="user_*" class="dongruan.UserAction" method="{1}">
 <result name="success">success.jsp</result>
-<result name="error">error.jsp</result>
+<result name="error">login.jsp</result>
 </action>
 <action name="news_*" class="dongruan.NewsAction" method="{1}">
 <result name="success">success.jsp</result>
 <result name="list">newslist.jsp</result>
+<result name="newsandcomments" type="json">
+   <param name="excludeProperties">newsList</param>    　　
+</result>
 </action>
 <action name="comment_*" class="dongruan.CommentAction" method="{1}">
 <interceptor-ref name="mystack"></interceptor-ref>
@@ -26,6 +29,18 @@
 <result name="success" type="json">
    <param name="excludeProperties">param</param>    　　
 </result>
+</action>
+<action name="upload_*" class="dongruan.UploadAction" method="{1}">
+<interceptor-ref name="defaultStack">
+	        <!-- 限制上传文件的扩展名。如果有多个，使用逗号分隔
+	        <param name="fileUpload.allowedExtensions">jpg,png,bmp</param>-->
+	        <!-- 限制上传文件的MIME类型。 如果有多个，使用逗号分隔 -->
+               <param name="fileUpload.allowedTypes">
+               text/plain,image/jpg,image/pjpeg,image/png
+               </param>
+</interceptor-ref>
+<result name="success">success.jsp</result>
+<result name="list">newslist.jsp</result>
 </action>
 </package>
 </struts>    

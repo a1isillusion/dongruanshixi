@@ -45,4 +45,9 @@ public String addComment() {
 	CommentDao.addComment(comment);
 	return SUCCESS;
 }
+public String deleteComment() {
+	System.out.println("deletecomment");
+	CommentDao.deleteComment(id);
+	return SUCCESS;
+}
 }

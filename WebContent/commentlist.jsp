@@ -1,48 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+String id=request.getParameter("id");
+%>
 <html>
 <head>
-<meta charset="utf-8"> 
-<title>新闻搜索</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>新闻评论</title>
 <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-  $("#search").change(function(){
-	$(".table").html("<tr class=\"table_header\">\n" +
-            "    <td>\n" +
-            "        新闻ID\n" +
-            "    </td>\n" +
-            "    <td>\n" +
-            "        新闻标题\n" +
-            "    </td>\n" +
-            "    <td>\n" +
-            "        新闻内容\n" +
-            "    </td>\n" +
-            "    <td>\n" +
-            "        新闻作者\n" +
-            "    </td>\n" +
-            "</tr>")
-	if(this.value!=""){
+	 var reg = new RegExp("(^|&)"+"id"+"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+     var r = window.location.search.substr(1).match(reg);  //匹配目标参数
     $.ajax({
-            url: "search_search",
+            url: "news_getNewsById?news.id="+r[2],
             type: "POST",
             datatype:"JSON",
-            data: {param:this.value},
+            data: {},
             success: function (data) {
-            	$.each(data.newsList, function (i, item) {  
+            	$.each(data.news.comments, function (i, item) {  
                     var tablehtml="<tr class=\"row1\">\n" +
                     "    <td>\n" +
                     "        "+item.id+"\n" +
                     "    </td>\n" +
                     "    <td>\n" +
-                    "        "+item.title+"\n" +
+                    "        "+item.author+"\n" +
                     "    </td>\n" +
                     "    <td>\n" +
                     "        "+item.content+"\n" +
                     "    </td>\n" +
                     "    <td>\n" +
-                    "        "+item.author+"\n" +
+                    "        "+item.date+"\n" +
+                    "    </td>\n" +
+                    "    <td>\n" +
+                    "        <a href=\"comment_deleteComment?id="+item.id+"\">删除评论</a>\n" +
                     "    </td>\n" +
                     "</tr>"
             		$(".table").append(tablehtml)
@@ -52,8 +44,7 @@ $(document).ready(function(){
                 alert("提交失败！");
             }
         });
-	}
-  });
+
 });
 </script>
 <link rel="stylesheet" type="text/css" href="css/style.css" />
@@ -70,7 +61,7 @@ $(document).ready(function(){
 					</div>
 					<div id="topheader">
 						<h1 id="title">
-							<a href="#">新闻列表</a>
+							<a href="#">新闻评论</a>
 						</h1>
 					</div>
 					<div id="navigation">
@@ -80,21 +71,24 @@ $(document).ready(function(){
 					<p id="whereami">
 					</p>
 					<h1>
-						新闻搜索:<input id="search" type="text" > 
+						新闻评论
 					</h1>
 					<table class="table">
 						<tr class="table_header">
 							<td>
-								新闻ID
+								评论ID
 							</td>
 							<td>
-								新闻标题
+								评论作者
 							</td>
 							<td>
-								新闻内容
+								评论内容
 							</td>
 							<td>
-								新闻作者
+								评论时间
+							</td>
+							<td>
+							             评论操作
 							</td>
 						</tr>
 					</table>

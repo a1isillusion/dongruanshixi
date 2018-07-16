@@ -19,8 +19,10 @@ public User getUser() {
 public String login(){
     boolean iflogin=UserDao.checkUser(user);
     System.out.println(iflogin);
-    
+    if(iflogin)
 	return SUCCESS;
+    else 
+    return ERROR;
 }
 public String zhuce(){  
     UserDao.saveUser(user);

@@ -27,4 +27,11 @@ public class CommentDao {
 		session.close();
 		
 	}
+	public static void deleteComment(String id) {
+		Session session=HibernateFactory.getSession();
+		Transaction tx=session.beginTransaction();
+		session.createQuery("delete Comment c where c.id=?").setParameter(0,id).executeUpdate();
+		tx.commit();
+		session.close();
+	}
 }

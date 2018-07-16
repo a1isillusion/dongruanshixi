@@ -41,4 +41,14 @@ public String getQueryNews() {
 	System.out.println(newsList.get(0).title);
 	return "list";
 }
+public String deleteNews() {
+	System.out.println("deletenews"+news.id);
+	NewsDao.deleteNews(news.id);
+	return SUCCESS;
+}
+public String getNewsById() {
+	System.out.println("getnewsbyid");
+	news=NewsDao.getNews(news.id);
+	return "newsandcomments";
+}
 }

@@ -15,10 +15,12 @@ public class ContentInterceptor extends AbstractInterceptor {
         System.out.println("À¹½ØÆ÷³É¹¦");
         CommentAction action=(CommentAction) invocation.getAction();
         Comment comment=action.getComment();
+        if(comment!=null) {
         String content=comment.getContent();
         content=content.replaceAll("²Ý", "*");
         System.out.println(content);
         comment.setContent(content);
+        }
 		return invocation.invoke();
 	}
 }

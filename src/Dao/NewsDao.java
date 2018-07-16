@@ -35,4 +35,20 @@ public static List<News> searchNews(String param){
 	session.close();
 	return newsList;
 }
+public static void deleteNews(String id){
+	Session session=HibernateFactory.getSession();
+	Transaction tx=session.beginTransaction();
+	session.createQuery("delete News n where n.id=?").setParameter(0, id).executeUpdate();
+	tx.commit();
+	session.close();
+}
+public static News getNews(String id){
+	Session session=HibernateFactory.getSession();
+	Transaction tx=session.beginTransaction();
+	News news=session.get(News.class, id);
+	tx.commit();
+	session.close();
+	return news;
+	
+}
 }
