@@ -33,7 +33,7 @@
 					<h1>
 						登录
 					</h1>
-					<form form action="user_login" method="post">
+					<form action="user_login" method="post">
 						<table cellpadding="0" cellspacing="0" border="0"
 							class="form_table">
 							<tr>
